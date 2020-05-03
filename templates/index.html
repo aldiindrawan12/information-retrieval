@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IR System</title>
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+	<div class="header">
+		<div class="header-container">
+			<ul>
+				<li><a href="/"><span>Kumpulan Dokumen</span></a></li>
+				<li><a href="/query"><span>Cranfield Query</span></a></li>
+				<li><a href="/relevant"><span>Cranfield Relevance Judgement</span></a></li>
+				<li><a href="/hasilsistem"><span>Hasil Relevance Judgement</span></a></li>
+				<li><a href="/queryuser"><span>Pencarian</span></a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="container">
+		<form action="/queryuser" method="post" id="search">
+			<label>Masukkan Query</label>
+			<input type="text" name="query" id="query-input" placeholder="Masukkan query..."></input>
+			<input type="submit" name="submit" value="Cari" class="button search-button">
+		</form>
+		<div class="page-title">
+			<h1>Koleksi Dokumen Cranfield Dataset</h1>
+		</div>
+		
+		<!-- {% for isinya in isi: %}
+			<div class="card result-card">
+				{%if isinya[0:2]==".I": %}
+				<hr>
+				{%endif%}
+				<h6>{% print isinya%}</h6>
+			</div>
+		{% endfor%} -->
+
+		{% for i in range(1405) %}
+			<a href="/hasil/{{ i+1 }}" class="url">
+				<div class="card result-card">
+					<h3>Dokumen {{ i+1 }}</h3><br>
+				</div>
+			</a>
+		{% endfor %}
+	</div>
+	<div class="footer">
+		<h4>Anggota Kelompok</h4>
+		<ol>
+			<li>Aldi Indrawan (14117055)</li>
+			<li>Adila Gita Risnanda (14117047)</li>
+			<li>Riwandy (14117098)</li>
+			<li>M. Alfan Riyadi (14117150)</li>
+		</ol>
+	</div>
+</body>
+</html>

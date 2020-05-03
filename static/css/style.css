@@ -1,0 +1,200 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+    line-height: 1;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.header{
+    display: block;
+    height: 60px;
+    width: 100%;
+    padding: 0 10%;
+    box-sizing: border-box;
+    background-color: rgb(35, 78, 170);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    position: fixed;
+}
+
+.header-container{
+    box-sizing: border-box;
+    float: right;
+}
+
+.header-container ul li{
+    float: left;
+}
+
+.header-container ul li:hover{
+    background-color: rgb(16, 59, 153);
+}
+
+.header-container ul li a{
+    display: inline-block;
+    height: 60px;
+    width: fit-content;
+    color: white;
+    text-decoration: none;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.header-container ul li a span{
+    line-height: 60px;
+}
+
+.container{
+    width: 80%;
+    margin: auto;
+    padding-top: 60px;
+    min-height: 800px;
+    box-sizing: border-box;
+}
+
+.page-title{
+    display: block;
+    padding: 40px 0 20px 0;
+}
+
+.page-title h1{
+    font-weight: bold;
+    font-size: 36px;
+    display: inline-block;
+    margin: auto;
+}
+
+#search{
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+#search label{
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#query-input{
+    height: 30px;
+    line-height: 30px;
+    font-size: 20px;
+    width: 85%;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 5px 20px;
+    transition: all 0.25s ease-in-out;
+    resize: none;
+    color: rgb(95, 95, 95);
+}
+
+#query-input:focus, #query-input:hover{
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.button{
+    background-color: rgb(231, 48, 48);
+    border: none;
+    border-radius: 5px;
+    transition: all 0.25s ease-in-out;
+    color: white;
+    border: 1px solid red;
+}
+
+.button:hover{
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.search-button{
+    width: 10%;
+    height: 40px;
+    float: right;
+}
+
+#relevant-document span{
+    font-weight: bold;
+}
+
+.url{
+    text-decoration: none;
+}
+
+.card{
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    color: black;
+}
+
+.card:hover{
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.result-card{
+    margin-top: 20px;
+    width: 100%;
+    padding: 20px 30px;
+    box-sizing: border-box;
+}
+
+.result-card h3{
+    font-size: 20px;
+}
+
+.footer{
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    margin-top: 40px;
+    padding: 40px 10%;
+    box-sizing: border-box;
+}
+
+.footer h4{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}

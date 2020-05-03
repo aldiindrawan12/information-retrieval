@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IR System</title>
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+	<div class="header">
+		<div class="header-container">
+			<ul>
+				<li><a href="/"><span>Kumpulan Dokumen</span></a></li>
+				<li><a href="/query"><span>Cranfield Query</span></a></li>
+				<li><a href="/relevant"><span>Cranfield Relevance Judgement</span></a></li>
+				<li><a href="/hasilsistem"><span>Hasil Relevance Judgement</span></a></li>
+				<li><a href="/queryuser"><span>Pencarian</span></a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="container">
+		<div class="page-title">
+			<h1>Dokumen Relevan Hasil Sistem</h1>
+		</div>
+		{% for isinya in isi: %}
+			<h6>{% print isinya%}</h6>
+		{% endfor%}
+	</div>
+	<div class="footer">
+		<h4>Anggota Kelompok</h4>
+		<ol>
+			<li>Aldi Indrawan (14117055)</li>
+			<li>Adila Gita Risnanda (14117047)</li>
+			<li>Riwandy (14117098)</li>
+			<li>M. Alfan Riyadi (14117150)</li>
+		</ol>
+	</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+
+untuk menjalankan aplikasi
+1. install python
+2. install pip
+3. install numpy (pip install numpy)
+4. install scipy (pip install scipy)
+5. install install virtualenv (pip install virtualenv)
+
+alur menjalankan aplikasi
+1. buka cmd masuk ke dorectori project
+2. ketik "$env:FLASK_DEBUG = 1"
+3. lalu ketik "flask run"
+4. buka di browser localhost:5000
