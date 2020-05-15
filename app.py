@@ -243,15 +243,81 @@ def query_user():
             key = lambda k: abstract_similarity[k], reverse = True)
         abstract_similarity.sort(reverse = True)
         jumlah_hasil=0    
-        for j in range (1405):
+        for j in range (30):
             similarity = abstract_similarity[j]
             if similarity == 0:
                 continue
             else: 
                 jumlah_hasil += 1
-        print(query)
 
     return render_template('queryuser.html',hasil=jumlah_hasil,index=abstract_similarity_index,sim=abstract_similarity,query=inputan)
+
+#metode rochioo
+@app.route("/rochioo",methods=['GET','POST'])
+def rochioo():
+    #menampilkan hasil pencarian pengguna
+    inputan = ""
+    if request.method=="POST":
+        inputan = request.form['query']
+    current_list = []
+    current_list = inputan.split()
+    new_list = []
+    query = []
+    for word in current_list:
+        if word in closed_class_stop_words:
+            continue
+        if word.isalnum() == False:
+        	continue
+        if word.isdigit():
+            continue
+        if word not in new_list:
+            new_list.append(word.lower())  
+    query.append(new_list) #menyimpan query dalam query
+    print(query)
+    #proses pencarian dan memberi index
+    for i in range (1):
+        rel = []#array relevan
+        norel = []#array no relevan
+        abstract_similarity = []
+        for j in range (1405):
+            abstract_score = []
+            row_tf = []
+            for word in query[i]:
+                if word not in abstract_words:
+                    tf = 0.0
+                    idf = 0.0
+                else:
+                    tf = abstract_words[word].get(j, 0.0)
+                    idf = math.log10(1405.0/abstract_words[word]['SUM'])
+                if(tf > 0):
+                    abstract_score.append(1*(idf+1))
+                else:
+                    abstract_score.append(0*(idf+1))
+                row_tf.append(tf)
+            simfix = np.dot(row_tf,abstract_score)
+            abstract_similarity.append(simfix)
+
+        abstract_similarity_index = sorted(range(len(abstract_similarity)), \
+            key = lambda k: abstract_similarity[k], reverse = True)
+        abstract_similarity.sort(reverse = True)
+
+        jumlah_hasil=0    
+        for j in range (30):
+            similarity = abstract_similarity[j]
+            if similarity == 0:
+                continue
+            else: 
+                if(jumlah_hasil<15):
+                    rel.append(abstract_similarity_index)
+                else:
+                    norel.append(abstract_similarity_index)
+                jumlah_hasil += 1
+    print(len(rel))
+    for x in rel:
+        print(x)
+    print(len(norel))
+
+    return render_template('index.html')
 
 @app.route('/hasil/<index>',methods=['GET','POST'])
 def coba(index):

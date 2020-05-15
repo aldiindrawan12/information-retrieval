@@ -23,8 +23,12 @@
 			<input type="text" name="query" id="query-input" placeholder="Masukkan query..."></input>
 			<input type="submit" name="submit" value="Cari" class="button search-button">
 		</form>
+		<form action="/rochioo" method="post" id="rochio">
+			<textarea type="text" name="query" hidden>{{query.lower()}}</textarea>
+			<button>Lihat Hasil Metode Rochioo</button>
+		</form>
 		<h2 id="relevant-document">Ditemukan {%print hasil%} dokumen yang relevan dengan query <span>{{query.lower()}}</span></h2>
-		{% for i in range(1405) %}
+		{% for i in range(30) %}
 			{% if sim[i]!=0 %}
 					<a href="/hasil/{{ index[i]+1 }}" class="url">
 						<div class="card result-card">
