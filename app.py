@@ -158,7 +158,7 @@ def hasil_sistem():
         abstract_similarity = []
         for j in range (1405):
             abstract_score = []
-            row_tf = []
+            raw_tf = []
             for word in query_text[i]:
                 if word not in abstract_words:
                     tf = 0.0
@@ -170,8 +170,8 @@ def hasil_sistem():
                     abstract_score.append(1*(idf+1))
                 else:
                     abstract_score.append(0*(idf+1))
-                row_tf.append(tf)
-            simfix = np.dot(row_tf,abstract_score)
+                raw_tf.append(tf)
+            simfix = np.dot(raw_tf,abstract_score)
                 
     #		for sim in abstract_score:
     #			simfix += sim
@@ -200,11 +200,11 @@ def hasil_sistem():
 @app.route('/queryuser',methods=['GET','POST'])
 def query_user():
     #menampilkan hasil pencarian pengguna
-    inputan = ""
+    user_query_input = ""
     if request.method=="POST":
-        inputan = request.form['query']
+        user_query_input = request.form['query']
     current_list = []
-    current_list = inputan.split()
+    current_list = user_query_input.split()
     new_list = []
     query = []
     for word in current_list:
@@ -223,7 +223,7 @@ def query_user():
         abstract_similarity = []
         for j in range (1405):
             abstract_score = []
-            row_tf = []
+            raw_tf = []
             for word in query[i]:
                 if word not in abstract_words:
                     tf = 0.0
@@ -235,8 +235,8 @@ def query_user():
                     abstract_score.append(1*(idf+1))
                 else:
                     abstract_score.append(0*(idf+1))
-                row_tf.append(tf)
-            simfix = np.dot(row_tf,abstract_score)
+                raw_tf.append(tf)
+            simfix = np.dot(raw_tf,abstract_score)
             abstract_similarity.append(simfix)
 
         abstract_similarity_index = sorted(range(len(abstract_similarity)), \
@@ -250,17 +250,17 @@ def query_user():
             else: 
                 jumlah_hasil += 1
 
-    return render_template('queryuser.html',hasil=jumlah_hasil,index=abstract_similarity_index,sim=abstract_similarity,query=inputan)
+    return render_template('queryuser.html',hasil=jumlah_hasil,index=abstract_similarity_index,sim=abstract_similarity,query=user_query_input)
 
-#metode rochioo
-@app.route("/rochioo",methods=['GET','POST'])
-def rochioo():
+#metode rocchio
+@app.route("/rocchio",methods=['GET','POST'])
+def rocchio():
     #menampilkan hasil pencarian pengguna
-    inputan = ""
+    user_query_input = ""
     if request.method=="POST":
-        inputan = request.form['query']
+        user_query_input = request.form['query']
     current_list = []
-    current_list = inputan.split()
+    current_list = user_query_input.split()
     new_list = []
     query = []
     for word in current_list:
@@ -281,7 +281,7 @@ def rochioo():
         abstract_similarity = []
         for j in range (1405):
             abstract_score = []
-            row_tf = []
+            raw_tf = []
             for word in query[i]:
                 if word not in abstract_words:
                     tf = 0.0
@@ -293,8 +293,8 @@ def rochioo():
                     abstract_score.append(1*(idf+1))
                 else:
                     abstract_score.append(0*(idf+1))
-                row_tf.append(tf)
-            simfix = np.dot(row_tf,abstract_score)
+                raw_tf.append(tf)
+            simfix = np.dot(raw_tf,abstract_score)
             abstract_similarity.append(simfix)
 
         abstract_similarity_index = sorted(range(len(abstract_similarity)), \
@@ -302,7 +302,7 @@ def rochioo():
         abstract_similarity.sort(reverse = True)
 
         jumlah_hasil=0    
-        for j in range (30):
+        for j in range (1405):
             similarity = abstract_similarity[j]
             if similarity == 0:
                 continue
@@ -315,19 +315,19 @@ def rochioo():
             if similarity == 0:
                 continue
             else: 
-                if(k<(jumlah_hasil/2)):
+                if(k<(15)):
                     rel.append(abstract_similarity_index[k])
-                else:
+                elif(k > jumlah_hasil-15):
                     norel.append(abstract_similarity_index[k])
 
-    #hitung rochioo
+    #hitung rocchio
     #hitung vektor relevan
     for i in range (1):
         abstract_similarity = []
         vektor_relevan = []
         for j in range (1405):
             abstract_score = []
-            row_tf = []
+            raw_tf = []
             if(j in rel):
                 for word in query[i]:
                     if word not in abstract_words:
@@ -340,10 +340,10 @@ def rochioo():
                         abstract_score.append(1*(idf+1))
                     else:
                         abstract_score.append(0*(idf+1))
-                    row_tf.append(tf)
-                simfix = np.dot(row_tf,abstract_score)
+                    raw_tf.append(tf)
+                simfix = np.dot(raw_tf,abstract_score)
                 abstract_similarity.append(simfix)
-                vektor_relevan.append(np.array(row_tf)*np.array(abstract_score))
+                vektor_relevan.append(np.array(raw_tf)*np.array(abstract_score))
             else:
                 continue
     
@@ -353,7 +353,7 @@ def rochioo():
         vektor_norelevan = []
         for j in range (1405):
             abstract_score = []
-            row_tf = []
+            raw_tf = []
             if(j in norel):
                 for word in query[i]:
                     if word not in abstract_words:
@@ -366,10 +366,10 @@ def rochioo():
                         abstract_score.append(1*(idf+1))
                     else:
                         abstract_score.append(0*(idf+1))
-                    row_tf.append(tf)
-                simfix = np.dot(row_tf,abstract_score)
+                    raw_tf.append(tf)
+                simfix = np.dot(raw_tf,abstract_score)
                 abstract_similarity.append(simfix)
-                vektor_norelevan.append(np.array(row_tf)*np.array(abstract_score))
+                vektor_norelevan.append(np.array(raw_tf)*np.array(abstract_score))
             else:
                 continue
 
@@ -391,12 +391,12 @@ def rochioo():
     hasil_norelevan = vektor_norelevan[0]/sum(vektor_norelevan[0])
     for x in range(len(vektor_norelevan)):
         hasil_norelevan = hasil_norelevan + (vektor_norelevan[x] / sum(vektor_norelevan[x]))
-    #hitung rochioo
-    rochioo = vektor_query+hasil_relevan-hasil_norelevan
-    #jika nilai setelah rochioo < 0 hapus term dari query
+    #hitung rocchio
+    rocchio = vektor_query+hasil_relevan-hasil_norelevan
+    #jika nilai setelah rocchio < 0 hapus term dari query
     list_hapus_query = []
-    for x in range(len(rochioo)):
-        if rochioo[x] <= 0:
+    for x in range(len(rocchio)):
+        if rocchio[x] <= 0:
             list_hapus_query.append(query[0][x])
         else:
             continue
@@ -409,7 +409,7 @@ def rochioo():
         abstract_similarity = []
         for j in range (1405):
             abstract_score = []
-            row_tf = []
+            raw_tf = []
             for word in query[i]:
                 if word not in abstract_words:
                     tf = 0.0
@@ -421,8 +421,8 @@ def rochioo():
                     abstract_score.append(1*(idf+1))
                 else:
                     abstract_score.append(0*(idf+1))
-                row_tf.append(tf)
-            simfix = np.dot(row_tf,abstract_score)
+                raw_tf.append(tf)
+            simfix = np.dot(raw_tf,abstract_score)
             abstract_similarity.append(simfix)
 
         abstract_similarity_index = sorted(range(len(abstract_similarity)), \
@@ -430,7 +430,7 @@ def rochioo():
         abstract_similarity.sort(reverse = True)
 
         jumlah_hasil=0    
-        for j in range (30):
+        for j in range (1405):
             similarity = abstract_similarity[j]
             if similarity == 0:
                 continue
@@ -442,7 +442,7 @@ def rochioo():
     print("total relevan = ", hasil_relevan)
     print("total no relevan = ", hasil_norelevan)
     print("cektor query = ",vektor_query)
-    print("rochioo : ",rochioo)
+    print("rocchio : ",rocchio)
     print(query[0])
     #print("vektor relevan = ",len(vektor_relevan),"---",vektor_relevan)
     #print("vektor no relevan = ",len(vektor_norelevan),"--",vektor_norelevan)
@@ -450,7 +450,7 @@ def rochioo():
     #print(rel)
     #print(norel)
     query_baru = " ".join(query[0])
-    return render_template('rochioo.html',hasil=jumlah_hasil,index=abstract_similarity_index,sim=abstract_similarity,query=query_baru)
+    return render_template('rocchio.html',hasil=jumlah_hasil,index=abstract_similarity_index,sim=abstract_similarity,query=query_baru,user_query=user_query_input)
 
 @app.route('/hasil/<index>',methods=['GET','POST'])
 def coba(index):

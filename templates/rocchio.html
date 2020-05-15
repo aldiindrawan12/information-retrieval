@@ -18,13 +18,15 @@
 		</div>
 	</div>
 	<div class="container">
-		<form action="/queryuser" method="post" id="search">
+		<form action="/rocchio" method="post" id="search">
 			<label>Masukkan Query</label>
 			<input type="text" name="query" id="query-input" placeholder="Masukkan query..."></input>
 			<input type="submit" name="submit" value="Cari" class="button search-button">
 		</form>
-		<h2 id="relevant-document">query hasil rochioo <span>{{query.lower()}}, Ditemukan {%print hasil%} dokumen yang relevan</span></h2>
-		{% for i in range(30) %}
+		<h2 id="relevant-document">Query yang anda masukkan : <span>{{user_query.lower()}}</span></h2>
+		<br>
+		<h2 id="relevant-document">Query Hasil Pehitungan Rocchio : <span>{{query.lower()}}<br><br>Ditemukan {%print hasil%} dokumen</span></h2>
+		{% for i in range(hasil) %}
 			{% if sim[i]!=0 %}
 					<a href="/hasil/{{ index[i]+1 }}" class="url">
 						<div class="card result-card">
