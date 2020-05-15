@@ -307,15 +307,25 @@ def rochioo():
             if similarity == 0:
                 continue
             else: 
-                if(jumlah_hasil<15):
-                    rel.append(abstract_similarity_index)
-                else:
-                    norel.append(abstract_similarity_index)
                 jumlah_hasil += 1
-    print(len(rel))
-    for x in rel:
-        print(x)
-    print(len(norel))
+
+        # pengelompokan relevan dan non relevan
+        for k in range (jumlah_hasil):
+            similarity = abstract_similarity[k]
+            if similarity == 0:
+                continue
+            else: 
+                if(k<(jumlah_hasil/2)):
+                    rel.append(abstract_similarity_index[k])
+                else:
+                    norel.append(abstract_similarity_index[k])
+
+        #hitung rochioo
+        
+
+
+    print(rel)
+    print(norel)
 
     return render_template('index.html')
 
