@@ -25,7 +25,7 @@
 		</form>
 		<h2 id="relevant-document">Query yang anda masukkan : <span>{{user_query.lower()}}</span></h2>
 		<br>
-		<h2 id="relevant-document">Query Hasil Pehitungan Rocchio : <span>{{query.lower()}}<br><br>Ditemukan {%print hasil%} dokumen</span></h2>
+		<h2 id="relevant-document">Query Hasil Perhitungan Rocchio : <span>{{query.lower()}}<br><br>Ditemukan {%print hasil%} dokumen</span></h2>
 		{% for i in range(hasil) %}
 			{% if sim[i]!=0 %}
 					<a href="/hasil/{{ index[i]+1 }}" class="url">
